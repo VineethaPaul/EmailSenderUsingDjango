@@ -1,0 +1,50 @@
+  <div class="row">
+    <div class="col">
+      <h6>Project Name <sup class="text-danger">*</sup></h6>
+      <input type="text" class="form-control form-control-sm" id="projectName" placeholder="Enter Project Name" name="projectName" value="{{msoData.0}}" readonly>
+    </div>
+    <div class="col">
+      <h6>Project Manager <sup class="text-danger">*</sup></h6>
+      <input type="text" class="form-control form-control-sm" id="projectManager" placeholder="Enter Project Manager" name="projectManager" value="{{msoData.1}}" readonly>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col">
+      <h6>GCSC Number <sup class="text-danger">*</sup></h6>
+      <input type="number" class="form-control form-control-sm" id="gcscNum" placeholder="Enter GCSC Number" name="gcscNum" value="{{msoData.2}}" readonly>
+    </div>
+    <div class="col">
+      <h6>IO Number  </h6>
+      <input type="number" class="form-control form-control-sm" id="ioNum" placeholder="Enter IO Number" name="ioNum" value="{{msoData.3}}" readonly>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col">
+      <h6>Budget Amount </h6>
+      <input type="number" class="form-control form-control-sm" id="budgetAmount" name="budgetAmount" value="{{msoData.4}}">
+    </div>
+    <div class="col">
+      <h6>Document Type <sup class="text-danger">*</sup> </h6>
+      <select class="form-control form-control-sm" id="docType" name="docType">
+        <option value="">Select Document Type</option>
+        <option value="1">Type 1</option>
+        <option value="2">Type 2</option>
+      </select>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col">
+      <h6>CBU Signers </h6>
+      <input type="text" class="form-control form-control-sm" id="CBUSigners"  name="CBUSigners" value="">
+      <small class="text-muted">Please list CBU signers if different from SOW or not listed in SOW</small>
+    </div>
+    <div class="col">
+      <h6>Carbon Copy </h6>
+      <input type="text" class="form-control form-control-sm" id="carbonCopy"  name="carbonCopy" value="">
+      <small class="text-muted">Enter users seperated with semi colons.</small>
+    </div>
+  </div>
+  <div class="form-group mt-3">
+    <h6>Attach File <sup class="text-danger">*</sup> </h6>
+    <input type="file" class="form-control form-control-sm" id="attachment"  name="attachment">
+  </div>

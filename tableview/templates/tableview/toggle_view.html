@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+{% comment %} {% load humanize %} {% endcomment %}
+<html lang="en">
+{% load static %}
+<head>
+  <title>Table view</title>
+  <!-- Bootstrap core CSS -->
+  {% comment %} <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> {% endcomment %}
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <!-- jquery cdns (order- popperjs, jquery, bootstrap.min.js) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+  <!-- End jquery cdns (order- popperjs, jquery, bootstrap.min.js) -->
+  
+  <!-- fontawesome -->
+  <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
+  <!-- End fontawesome -->
+
+
+  <!-- Data Table cdns -->
+  <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+  <script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js" defer></script>
+  <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js" defer></script>
+  <!-- End Data Table cdns -->
+
+  <style>
+    .table-bordered {
+      border :1px solid black;
+    }
+  </style>
+
+  
+</head>
+
+<body>
+
+  <!-- Page Content -->
+  <div class=" card mb-2 shadow-lg mt-3 p-2">
+    <section class="">
+      <h1 class=" mb-3 text-center">MSO Data Set</h1>
+      {% comment %} {% if data_short %}
+        <div class="alert alert-primary" role="alert">
+          {{data_short.name}}
+        </div>
+      {% endif %} {% endcomment %}
+      <div class="m-3">
+        <table class="table table-hover table-bordered mb-4">
+          {% comment %} {% for wbs_data in data.wbs_data %} {% endcomment %}
+          <tbody>
+            <tr>
+              <th scope="row">WBS#</th>
+              <td>
+                  {% for wbs in data_short.wbs_data.wbs %}
+                      {{wbs}} {% if not forloop.last %},{% endif %}
+                  {% endfor %}
+
+              </td>
+              <th scope="row">Budgeted Amount</th>
+              <td>
+                  {{data_short.wbs_data.budgeted_amount}}
+
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">CBU PO# </th>
+              <td>
+                  {{data_short.wbs_data.cbu_po}}
+
+              </td>
+              <th scope="row">Billed Amount</th>
+              <td>
+                  {{data_short.wbs_data.billed_amount}}
+
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Financial Plan Status</th>
+              <td>
+                  {{data_short.wbs_data.financial_plan_status}}
+
+              </td>
+              <th scope="row">Unbilled Amount</th>
+              <td>
+                  {{data_short.wbs_data.unbilled_amount}}
+
+              </td>
+            </tr>
+            {% comment %} {% endfor %} {% endcomment %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+  {% comment %} <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+      Button with data-target
+  </button>
+  <div class="collapse" id="collapseExample"> {% endcomment %}
+  <div class="card card-body shadow-lg">
+    <h1 class="text-center mb-3">MSO Data Set details</h1>
+    {% comment %} {% if data_long %}
+      <div class="alert alert-primary" role="alert">
+        {{data_long.name}}
+      </div>
+    {% endif %} {% endcomment %}
+    <table id="example" class="table table-hover table-bordered table-striped">
+      <thead style=background-color:#4E88D3;color:white;>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">WBS</th>
+          <th scope="col">Description</th>
+          <th scope="col">Milestone due date</th>
+          <th scope="col">Cap/Exp</th>
+          <th scope="col">SOW MSO Amount</th>
+          <th scope="col">HAEA Invoice</th>
+          <th scope="col">HAEA Invoice Date</th>
+          <th scope="col">Status</th>
+          <th scope="col">Upload</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for wbs_data in data_long.wbs_data %}
+          <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{wbs_data.wbs}}</td>
+            <td>{{wbs_data.description}}</td>
+            <td>{{wbs_data.milestone_due_date}}</td>
+            <td>{{wbs_data.Cap_or_Exp}}</td>
+            <td>${{wbs_data.sow_mso_amount}}</td>
+            <td>{{wbs_data.haea_invoice}}</td>
+            <td>{{wbs_data.haea_invoice_date}}</td>
+            <td>{{wbs_data.status}}</td>
+            <td class="text-center">
+              {% comment %} data-toggle="modal" data-target="#msoDataUploadModal"  {% endcomment %}
+              <button class="fa fa-upload border-0" id="msoUploadBtn" data-toggle="modal" data-target="#msoDataUploadModal" value={{forloop.counter}} style=color:#4E88D3;background:none></button>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="modal fade" id="msoDataUploadModal">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+      <div class="modal-content">
+          <div class="modal-header"  style=background-color:#4E88D3;color:white;>
+            <h3>Upload MSO Data</h3>
+            <button type="button" class="text-danger border-0" id="cancel" data-dismiss="modal" style="background:none">X</button>
+          </div>
+          <div class="modal-body p-3 m-2" id="msoDataUploadModalBody">
+          
+             
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" id="saveMsoData" name="saveMsoData">Save</button>
+            <button type="button" class="btn btn-danger" id="cancel" data-dismiss="modal">Close</button>
+          </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    $(document).on('click', '#msoUploadBtn', function(){
+      msoId = $(this).val()
+      console.log(msoId,'msoIdmsoId')
+      if(msoId){
+        $.ajax({
+          type    : 'GET',
+          url     : '{% url "mso_data_uploadview" %}',
+          data    : {'msoId':msoId},
+          success : function(response){
+            $('#msoDataUploadModalBody').html(response)
+          }
+        })
+      }
+    })
+  </script> 
+{% comment %} 
+  <!-- Bootstrap core JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> {% endcomment %}
+
+
+
+<script>
+  $(document).ready(function () {
+      $('#example').DataTable();
+  });
+</script>
+</body>
+
+</html>
