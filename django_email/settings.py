@@ -44,7 +44,9 @@ INSTALLED_APPS = [
     'tableview',
     'poll',
     'datatables',
-    'fontawesomefree'
+    'fontawesomefree',
+    'django_celery_results',
+    'django_celery_beat'
 ]
 
 #  Email
@@ -53,7 +55,6 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'mohandivay@gmail.com'
-# EMAIL_HOST_PASSWORD = 'kmzjbmotsoojllza'
 EMAIL_HOST_PASSWORD = '******'
 
 
@@ -140,4 +141,14 @@ STATIC_URL = '/static/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
+# CELERY SETTINGS
 
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELER_TASK_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Asia/Kolkata'
+
+CELERY_RESULT_BACKEND = 'django-db'
+
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'

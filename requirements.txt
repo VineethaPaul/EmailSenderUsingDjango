@@ -1,6 +1,8 @@
 Django==2.2.2
-django-crispy-forms==1.7.2
+lsdjango-crispy-forms==1.7.2
 pytz==2019.1
 sqlparse==0.3.0
 celery
 fontawesomefree==6.3.0
+django-celery-results
+django_celery_beat
