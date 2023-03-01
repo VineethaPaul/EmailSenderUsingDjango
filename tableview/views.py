@@ -94,7 +94,7 @@ class ToggleTableView(View):
             "financial_plan_status": "Done",
             "budgeted_amount": "Capital",
             "billed_amount": '50,000',
-            "unbilled_amount":1234
+            "unbilled_amount":'15,000'
 
         }
     }
@@ -155,13 +155,13 @@ class MsoDataUploadView(View):
     def get(self, request, *args, **kwargs):
         msoId = request.GET['msoId']
         if msoId == '1':
-            msoData = ['MSO','Andy',1234,78956,50000]
+            msoData = ['MSO','Andy',1234,78956,'$50,000']
         elif msoId == '2':
-            msoData = ['MSO','Tom',3456,78956,80000]
+            msoData = ['MSO','Tom',3456,78956,'$80,000']
         elif msoId == '3':
-            msoData = ['MSO','Bob',67890,78956,100000]
+            msoData = ['MSO','Bob',67890,78956,'$10,0000']
         elif msoId == '4':
-            msoData = ['MSO','Jenny',34564,78956,500000]
+            msoData = ['MSO','Jenny',34564,78956,'$50,0000']
         else:
             msoData = None
         print(request.GET['msoId'],'msoidmsoidmsoidmsoid',msoData)
