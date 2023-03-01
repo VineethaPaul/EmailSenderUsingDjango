@@ -92,7 +92,7 @@ class ToggleTableView(View):
             "wbs": ["S22-2001", "S22-2002", "S22-2003"],
             "cbu_po": "Dummy CBU PO",
             "financial_plan_status": "Done",
-            "budgeted_amount": "Capital",
+            "budgeted_amount": "$75,000",
             "billed_amount": '50,000',
             "unbilled_amount":'15,000'
 
@@ -106,7 +106,7 @@ class ToggleTableView(View):
             "milestone_due_date": "12/1/2022",
             "Cap_or_Exp": "Capital",
             "sow_mso_amount": '50,000',
-            "haea_invoice":1234,
+            "haea_invoice":452319,
             "haea_invoice_date":"12/6/2022",
             "status":"Invoiced"
 
@@ -139,7 +139,7 @@ class ToggleTableView(View):
             "milestone_due_date": "15/12/2022",
             "Cap_or_Exp": "Capital",
             "sow_mso_amount": '70,000',
-            "haea_invoice":1234,
+            "haea_invoice":452319,
             "haea_invoice_date":"12/1/2022",
             "status":"Invoiced"
 
